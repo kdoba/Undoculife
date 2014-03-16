@@ -2,48 +2,28 @@
 using System.Collections;
 
 /// <summary>
-/// A script to show a conversation dialog.
+/// A response to a conversation that can trigger a series of actions.
 /// </summary>
-public class Conversation : MonoBehaviour {
+[System.Serializable]
+public class Response {
 
 	/// <summary>
-	/// If true, shows the dialog on collision.
+	/// The response text.
 	/// </summary>
-	public bool showOnCollide = true;
+	public string text = "response";
 
 	/// <summary>
-	/// The header text for the dialog.
+	/// Array of actions.
 	/// </summary>
-	public string headerText = "header";
+	public Action[] actions;
 
 	/// <summary>
-	/// The response choices.
+	/// Executes actions for this response.
 	/// </summary>
-	public string[] responses;
-
-	public 
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKey(downKey)) {
-			transform.Translate(0, -speed, 0);
-		}
-
-		if (Input.GetKey(upKey)) {
-			transform.Translate(0, speed, 0);
-		}
-
-		if (Input.GetKey(leftKey)) {
-			transform.Translate(-speed, 0, 0);
-		}
-
-		if (Input.GetKey(rightKey)) {
-			transform.Translate(speed, 0, 0);
+	/// <param name="obj">The object executing the action.</param>
+	public void execute(GameObject obj) {
+		foreach (Action act in actions) {
+			act.execute(obj);
 		}
 	}
 }

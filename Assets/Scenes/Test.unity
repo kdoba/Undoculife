@@ -124,6 +124,7 @@ GameObject:
   - 4: {fileID: 473489636}
   - 212: {fileID: 473489635}
   - 61: {fileID: 473489637}
+  - 114: {fileID: 473489638}
   m_Layer: 0
   m_Name: npc
   m_TagString: Untagged
@@ -177,6 +178,24 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: .319999993, y: .319999993}
   m_Center: {x: 0, y: 0}
+--- !u!114 &473489638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 473489634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866adedff65cd9646b019377ed591829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showOnCollide: 1
+  headerText: header
+  responses:
+  - text: response1
+    actions: []
+  - text: response2
+    actions: []
 --- !u!1001 &550295607
 Prefab:
   m_ObjectHideFlags: 0
@@ -234,6 +253,7 @@ GameObject:
   - 50: {fileID: 1026629232}
   - 61: {fileID: 1026629231}
   - 114: {fileID: 1026629230}
+  - 114: {fileID: 1026629233}
   m_Layer: 0
   m_Name: hero
   m_TagString: Untagged
@@ -311,13 +331,25 @@ Rigidbody2D:
   m_GameObject: {fileID: 1026629227}
   m_Mass: 1
   m_LinearDrag: 10
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 10
   m_GravityScale: 1
-  m_FixedAngle: 0
+  m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+--- !u!114 &1026629233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1026629227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574cde5c0d8c55840a2436c300ae3bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventName: OnConversation
 --- !u!1 &1124445567
 GameObject:
   m_ObjectHideFlags: 0
