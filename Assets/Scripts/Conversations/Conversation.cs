@@ -26,8 +26,11 @@ public class Conversation : MonoBehaviour {
 	/// Returns index of the response chosen or -1 if none chosen yet.
 	/// </summary>
 	public int UpdateGUI() {
-		float y = 0;
+		float y = 20;
 		int i = 0;
+		GUI.Label(new Rect(0, 0, 200, 20), headerText);
+
+		// show each response
 		foreach (Response response in responses) {
 			if (GUI.Button(new Rect(0, y, 200, 20), response.text)) {
 				return i;
