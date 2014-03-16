@@ -2,15 +2,14 @@
 using System.Collections;
 
 /// <summary>
-/// Controller to move player's rigidbody with keyboard input.
+/// Controller to move player with keyboard input.
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D))]
-public class PlayerRigidbodyController : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
 	/// <summary>
 	/// The speed.
 	/// </summary>
-	public float speed = 1.0f;
+	public float speed = 0.1f;
 
 	/// <summary>
 	/// Down key.
@@ -32,22 +31,27 @@ public class PlayerRigidbodyController : MonoBehaviour {
 	/// </summary>
 	public string rightKey = "right";
 
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKey(downKey)) {
-			rigidbody2D.AddForce(new Vector2(0, -1) * speed);
+			transform.Translate(0, -speed, 0);
 		}
 
 		if (Input.GetKey(upKey)) {
-			rigidbody2D.AddForce(new Vector2(0, 1) * speed);
+			transform.Translate(0, speed, 0);
 		}
 
 		if (Input.GetKey(leftKey)) {
-			rigidbody2D.AddForce(new Vector2(-1, 0) * speed);
+			transform.Translate(-speed, 0, 0);
 		}
 
 		if (Input.GetKey(rightKey)) {
-			rigidbody2D.AddForce(new Vector2(1, 0) * speed);
+			transform.Translate(speed, 0, 0);
 		}
 	}
 }
