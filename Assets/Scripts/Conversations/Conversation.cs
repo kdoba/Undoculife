@@ -7,11 +7,6 @@ using System.Collections;
 public class Conversation : MonoBehaviour {
 
 	/// <summary>
-	/// If true, shows the dialog on collision.
-	/// </summary>
-	public bool showOnCollide = true;
-
-	/// <summary>
 	/// The header text for the dialog.
 	/// </summary>
 	public string headerText = "header";
