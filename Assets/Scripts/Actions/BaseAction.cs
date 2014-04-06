@@ -5,12 +5,12 @@ using System.Collections;
 /// Base action that handles executing arbitrary logic.
 /// </summary>
 [System.Serializable]
-public class Action {
+public class BaseAction : MonoBehaviour {
 
 	/// <summary>
 	/// Execute the action.
 	/// </summary>
 	/// <param name="obj">The object executing the action.</param>
-	public void execute(GameObject obj) {
+	public virtual void Execute(GameObject obj) {
 	}
 }

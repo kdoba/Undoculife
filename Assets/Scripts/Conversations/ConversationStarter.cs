@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 /// <summary>
 /// A script for a player to start conversations with other npcs.
@@ -30,8 +31,14 @@ public class ConversationStarter : MonoBehaviour {
 	/// </summary>
 	void OnGUI() {
 		if (activeConversation != null) {
-			if (activeConversation.UpdateGUI() >= 0) {
+			int responseIndex = activeConversation.UpdateGUI();
+			if (responseIndex >= 0) {
+				Conversation oldConversation = activeConversation;
 				activeConversation = null;
+
+				if (responseIndex < oldConversation.responses.Length) {
+					oldConversation.responses[responseIndex].Execute(gameObject);
+				}
 			}
 		}
 	}
@@ -40,10 +47,18 @@ public class ConversationStarter : MonoBehaviour {
 	/// Sends a conversation message on collision.
 	/// </summary>
 	void OnCollisionEnter2D(Collision2D collision) {
-		Conversation conversation = collision.collider.gameObject.GetComponent<Conversation>();
-		if (conversation != null) {
-			activeConversation = conversation;
+		StartConversation(collision.collider.gameObject);
+	}
+
+	/// <summary>
+	/// Starts the conversation with another game object.
+	/// </summary>
+	/// <param name="obj">Object.</param>
+	public void StartConversation(GameObject obj) {
+		ConversationSet conversationSet = obj.GetComponent<ConversationSet>();
+		if (conversationSet != null) {
+			activeConversation = conversationSet.GetActiveConversation();
 		}
-		collision.collider.gameObject.SendMessage(eventName, SendMessageOptions.DontRequireReceiver);
+		obj.SendMessage(eventName, SendMessageOptions.DontRequireReceiver);
 	}
 }

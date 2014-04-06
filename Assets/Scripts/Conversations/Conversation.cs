@@ -33,6 +33,12 @@ public class Conversation : MonoBehaviour {
 			y += 20;
 			++i;
 		}
+
+		// Nevermind button
+		if (GUI.Button(new Rect(0, y, 200, 20), "Nevermind")) {
+			return i;
+		}
+
 		return -1;
 	}
 }

@@ -15,15 +15,15 @@ public class Response {
 	/// <summary>
 	/// Array of actions.
 	/// </summary>
-	public Action[] actions;
+	public BaseAction[] actions;
 
 	/// <summary>
 	/// Executes actions for this response.
 	/// </summary>
 	/// <param name="obj">The object executing the action.</param>
-	public void execute(GameObject obj) {
-		foreach (Action act in actions) {
-			act.execute(obj);
+	public void Execute(GameObject obj) {
+		foreach (BaseAction act in actions) {
+			act.Execute(obj);
 		}
 	}
 }
