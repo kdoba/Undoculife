@@ -13,9 +13,24 @@ public class ConversationStarter : MonoBehaviour {
 	public string eventName = "OnConversation";
 
 	/// <summary>
+	/// Optional user interface prefab for dialog.
+	/// </summary>
+	public GameObject uiPrefab = null;
+
+	/// <summary>
 	/// The active conversation.
 	/// </summary>
 	private Conversation activeConversation;
+
+	/// <summary>
+	/// The current ui shown, if any.
+	/// </summary>
+	private GameObject _uiShown = null;
+
+	/// <summary>
+	/// The current array of _buttons.
+	/// </summary>
+	private Button[] _buttons = null;
 
 	// Use this for initialization
 	void Start () {
@@ -31,13 +46,15 @@ public class ConversationStarter : MonoBehaviour {
 	/// </summary>
 	void OnGUI() {
 		if (activeConversation != null) {
-			int responseIndex = activeConversation.UpdateGUI();
-			if (responseIndex >= 0) {
-				Conversation oldConversation = activeConversation;
-				activeConversation = null;
+			if (_uiShown == null) {
+				int responseIndex = activeConversation.UpdateGUI();
+				if (responseIndex >= 0) {
+					Conversation oldConversation = activeConversation;
+					activeConversation = null;
 
-				if (responseIndex < oldConversation.responses.Length) {
-					oldConversation.responses[responseIndex].Execute(gameObject);
+					if (responseIndex < oldConversation.responses.Length) {
+						oldConversation.responses[responseIndex].Execute(gameObject);
+					}
 				}
 			}
 		}
@@ -60,5 +77,32 @@ public class ConversationStarter : MonoBehaviour {
 			activeConversation = conversationSet.GetActiveConversation();
 		}
 		obj.SendMessage(eventName, SendMessageOptions.DontRequireReceiver);
+
+		if (uiPrefab != null) {
+			// TODO: finish this
+			_uiShown = Instantiate(uiPrefab) as GameObject;
+			_buttons = _uiShown.GetComponentsInChildren<Button>();
+			for (int i = 0; i < _buttons.Length; ++i) {
+//				Button.ButtonClickedEvent ev = new Button.ButtonClickedEvent();
+//				ev.AddListener( 
+//				_buttons[i].onClick += OnResponseClick;
+			}
+			Button button;
+		}
+	}
+
+	/// <summary>
+	/// Called on a response click.
+	/// </summary>
+	private void OnResponseClick() {
+		int i = 0;
+		if (activeConversation != null) {
+			// TODO: finish this
+//			activeConversation.responses[
+			foreach (Button button in _buttons) {
+//				button.onClick -= OnResponseClick;
+			}
+			activeConversation = null;
+		}
 	}
 }

@@ -27,7 +27,7 @@ public class ConversationAction : BaseAction {
 	/// Execute the action.
 	/// </summary>
 	/// <param name="obj">The object executing the action.</param>
-	override public void Execute(GameObject obj) {
+	override public void Execute(GameObject obj, ActionData data = new ActionData()) {
 		ConversationStarter starter = obj.GetComponent<ConversationStarter>();
 		GameObject convObject = conversationObject == null ? 
 			gameObject : conversationObject;

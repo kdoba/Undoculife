@@ -16,7 +16,7 @@ public class OpenSceneAction : BaseAction {
 	/// Execute the action.
 	/// </summary>
 	/// <param name="obj">The object executing the action.</param>
-	override public void Execute(GameObject obj) {
+	override public void Execute(GameObject obj, ActionData data = new ActionData()) {
 		Application.LoadLevel(sceneName);
 	}
 }

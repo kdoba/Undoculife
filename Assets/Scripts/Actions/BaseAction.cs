@@ -11,6 +11,6 @@ public class BaseAction : MonoBehaviour {
 	/// Execute the action.
 	/// </summary>
 	/// <param name="obj">The object executing the action.</param>
-	public virtual void Execute(GameObject obj) {
+	public virtual void Execute(GameObject obj, ActionData data = new ActionData()) {
 	}
 }
