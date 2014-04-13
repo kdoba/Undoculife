@@ -18,6 +18,11 @@ public class ConversationStarter : MonoBehaviour {
 	public GameObject uiPrefab = null;
 
 	/// <summary>
+	/// The conversation used for reply (after choice is made).
+	/// </summary>
+	public Conversation replyConversation;
+	
+	/// <summary>
 	/// The active conversation.
 	/// </summary>
 	private Conversation activeConversation;
@@ -32,9 +37,14 @@ public class ConversationStarter : MonoBehaviour {
 	/// </summary>
 	private Button[] _buttons = null;
 
+	/// <summary>
+	/// Cached state.
+	/// </summary>
+	private State _state = null;
+
 	// Use this for initialization
 	void Start () {
-	
+		_state = GetComponent<State>();
 	}
 	
 	// Update is called once per frame
@@ -52,8 +62,19 @@ public class ConversationStarter : MonoBehaviour {
 					Conversation oldConversation = activeConversation;
 					activeConversation = null;
 
+					// reenable
+					if (_state != null) {
+						_state.state = null;
+					}
+
 					if (responseIndex < oldConversation.responses.Length) {
-						oldConversation.responses[responseIndex].Execute(gameObject);
+						Response response = oldConversation.responses[responseIndex];
+						response.Execute(gameObject);
+
+						if (response.reply != null && response.reply != "") {
+							// start conversation with self for reply
+							StartConversation(gameObject, response.reply);
+						}
 					}
 				}
 			}
@@ -71,24 +92,44 @@ public class ConversationStarter : MonoBehaviour {
 	/// Starts the conversation with another game object.
 	/// </summary>
 	/// <param name="obj">Object.</param>
-	public void StartConversation(GameObject obj) {
+	public void StartConversation(GameObject obj, string reply = null) {
+		// cannot start another conversation if we have an active one
+		if (activeConversation != null) {
+			return;
+		}
 		ConversationSet conversationSet = obj.GetComponent<ConversationSet>();
 		if (conversationSet != null) {
 			activeConversation = conversationSet.GetActiveConversation();
-		}
-		obj.SendMessage(eventName, SendMessageOptions.DontRequireReceiver);
-
-		if (uiPrefab != null) {
-			// TODO: finish this
-			_uiShown = Instantiate(uiPrefab) as GameObject;
-			_buttons = _uiShown.GetComponentsInChildren<Button>();
-			for (int i = 0; i < _buttons.Length; ++i) {
-//				Button.ButtonClickedEvent ev = new Button.ButtonClickedEvent();
-//				ev.AddListener( 
-//				_buttons[i].onClick += OnResponseClick;
+			if (reply != null && reply != "") {
+				activeConversation.headerText = reply;
 			}
-			Button button;
+						
+			// disable rigidbody while in conversation
+			if (_state != null) {
+				_state.state = State.DISABLED;
+			}
+
+			obj.SendMessage(eventName, SendMessageOptions.DontRequireReceiver);
+
+			if (uiPrefab != null) {
+				// TODO: finish this
+				_uiShown = Instantiate(uiPrefab) as GameObject;
+				_buttons = _uiShown.GetComponentsInChildren<Button>();
+				for (int i = 0; i < _buttons.Length; ++i) {
+					//				Button.ButtonClickedEvent ev = new Button.ButtonClickedEvent();
+					//				ev.AddListener( 
+					//				_buttons[i].onClick += OnResponseClick;
+				}
+				Button button;
+			}
 		}
+	}
+
+	/// <summary>
+	/// Returns the active conversation.
+	/// </summary>
+	public Conversation ActiveConversation {
+		get { return activeConversation; }
 	}
 
 	/// <summary>

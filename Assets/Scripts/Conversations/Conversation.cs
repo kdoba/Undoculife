@@ -23,7 +23,7 @@ public class Conversation : MonoBehaviour {
 	public int UpdateGUI() {
 		float y = 20;
 		int i = 0;
-		GUI.Label(new Rect(0, 0, 200, 20), headerText);
+		GUI.Label(new Rect(0, 0, 600, 20), headerText);
 
 		// show each response
 		foreach (Response response in responses) {
@@ -35,7 +35,7 @@ public class Conversation : MonoBehaviour {
 		}
 
 		// Nevermind button
-		if (GUI.Button(new Rect(0, y, 200, 20), "Nevermind")) {
+		if (GUI.Button(new Rect(0, y, 200, 20), "Exit")) {
 			return i;
 		}
 

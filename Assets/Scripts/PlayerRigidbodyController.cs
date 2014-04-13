@@ -32,8 +32,22 @@ public class PlayerRigidbodyController : MonoBehaviour {
 	/// </summary>
 	public string rightKey = "right";
 
+	/// <summary>
+	/// Cached state.
+	/// </summary>
+	private State _state;
+	
+	void Start() {
+		_state = GetComponent<State>();
+	}
+
 	// Update is called once per frame
 	void Update () {
+		// check for disabled state
+		if (_state != null && _state.state == State.DISABLED) {
+			return;
+		}
+
 		if (Input.GetKey(downKey)) {
 			rigidbody2D.AddForce(new Vector2(0, -1) * speed);
 		}

@@ -8,9 +8,14 @@ using System.Collections;
 public class Response {
 
 	/// <summary>
-	/// The response text.
+	/// The response text that the player says.
 	/// </summary>
 	public string text = "response";
+
+	/// <summary>
+	/// The optional reply that the npc gives.
+	/// </summary>
+	public string reply = null;
 
 	/// <summary>
 	/// Array of actions.

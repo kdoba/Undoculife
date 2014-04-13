@@ -16,6 +16,9 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400010}
+  - 114: {fileID: 11400012}
+  - 114: {fileID: 11400014}
   m_Layer: 0
   m_Name: hero
   m_TagString: Untagged
@@ -126,6 +129,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName: OnConversation
   uiPrefab: {fileID: 0}
+  replyConversation: {fileID: 0}
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039afd8f9028848ca9612fed38f1cf57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conversations:
+  - {fileID: 11400012}
+  activeConversationIndex: 0
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866adedff65cd9646b019377ed591829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headerText: header
+  responses: []
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76be656117004cf1a826f76c46f02e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -18,9 +18,22 @@ public class ActionControl : MonoBehaviour {
 	public BaseAction action = null;
 
 	/// <summary>
+	/// Cached state.
+	/// </summary>
+	private State _state;
+
+	void Start() {
+		_state = GetComponent<State>();
+	}
+
+	/// <summary>
 	/// Update this instance.
 	/// </summary>
 	void Update() {
+		// check for disabled state
+		if (_state != null && _state.state == State.DISABLED) {
+			return;
+		}
 		if (onMouseDown && Input.GetMouseButton(0)) {
 			ActionData data = new ActionData();
 			data.pos = MouseUtil.GetMouseWorldPos(); //Input.mousePosition;
